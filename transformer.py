@@ -3,6 +3,8 @@ import json
 import re
 import urllib.request
 import urllib.error
+import os
+import glob
 import ollama
 import pypdf
 
@@ -134,24 +136,50 @@ def extract_resume_data_ai(resume_text):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ai", action="store_true")
+    parser.add_argument("dir_path", help="Path to the directory containing PDF resumes")
+    parser.add_argument("--ai", action="store_true", help="Use AI-driven extraction instead of regex")
     args = parser.parse_args()
 
-    resume_text = read_pdf("C:/Users/ayu2805/Documents/mscdt/assets/resumes/Ayushmaan Padhi.pdf")
-    
-    if args.ai:
-        json_data = extract_resume_data_ai(resume_text)
-    else:
-        json_data = extract_resume_data_regex(resume_text)
-        
-    github_username = extract_github_username(json_data.get("links", []))
-    if github_username:
-        json_data["github_profile_data"] = fetch_github_data(github_username)
-    else:
-        json_data["github_profile_data"] = None
-        
+    if not os.path.isdir(args.dir_path):
+        print(f"Error: {args.dir_path} is not a valid directory.")
+        return
+
+    pdf_files = glob.glob(os.path.join(args.dir_path, "*.pdf"))
+    if not pdf_files:
+        print(f"No PDF files found in {args.dir_path}")
+        return
+
+    all_students_data = {}
+
+    for file_path in pdf_files:
+        filename = os.path.basename(file_path)
+        student_name = os.path.splitext(filename)[0]
+        print(f"Processing: {filename}")
+
+        try:
+            resume_text = read_pdf(file_path)
+            
+            if args.ai:
+                json_data = extract_resume_data_ai(resume_text)
+            else:
+                json_data = extract_resume_data_regex(resume_text)
+                
+            github_username = extract_github_username(json_data.get("links", []))
+            if github_username:
+                json_data["github_profile_data"] = fetch_github_data(github_username)
+            else:
+                json_data["github_profile_data"] = None
+                
+            all_students_data[student_name] = json_data
+            
+        except Exception as e:
+            print(f"Failed to process {filename}: {e}")
+
+    os.makedirs("out", exist_ok=True)
     with open("out/result.json", "w") as file:
-        json.dump(json_data, file, indent=4)
+        json.dump(all_students_data, file, indent=4)
+        
+    print(f"Successfully saved data for {len(all_students_data)} students to out/result.json")
 
 if __name__ == "__main__":
     main()

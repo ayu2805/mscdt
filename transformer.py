@@ -5,6 +5,7 @@ import urllib.request
 import urllib.error
 import os
 import glob
+import csv
 import ollama
 import pypdf
 
@@ -150,9 +151,46 @@ def calculate_data_quality(data):
         score += 1
     return score
 
+def load_csv_data(csv_path):
+    csv_lookup = {}
+    if not os.path.exists(csv_path):
+        return csv_lookup
+
+    with open(csv_path, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            candidate_id = row.get('candidate_id', '').strip()
+            full_name = row.get('full_name', '').strip()
+            location = row.get('location', '').strip()
+            
+            emails = [e.strip().lower() for e in row.get('emails', '').split(',') if e.strip()]
+            
+            for email in emails:
+                if email not in csv_lookup:
+                    csv_lookup[email] = []
+                csv_lookup[email].append({
+                    "candidate_id": candidate_id,
+                    "full_name": full_name,
+                    "location": location
+                })
+    return csv_lookup
+
+def reorder_keys(data):
+    ordered = {}
+    for k in ["candidate_id", "full_name", "emails", "phones", "location",
+              "links", "skills", "years_experience", "experience", "education_background",
+              "github_profile_data"]:
+        if k in data:
+            ordered[k] = data[k]
+    for k in data:
+        if k not in ordered:
+            ordered[k] = data[k]
+    return ordered
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("dir_path", help="Path to the directory containing PDF resumes")
+    parser.add_argument("csv_path", help="Path to the CSV file containing supplemental candidate data")
     parser.add_argument("--ai", action="store_true", help="Use AI-driven extraction instead of regex")
     args = parser.parse_args()
 
@@ -165,6 +203,7 @@ def main():
         print(f"No PDF files found in {args.dir_path}")
         return
 
+    csv_lookup = load_csv_data(args.csv_path)
     unique_candidates = {}
 
     for file_path in pdf_files:
@@ -185,7 +224,25 @@ def main():
             else:
                 json_data["github_profile_data"] = None
 
-            emails_key = tuple(sorted([e.lower() for e in json_data.get("emails", [])]))
+            resume_emails = [e.lower() for e in json_data.get("emails", [])]
+
+            candidate_id_csv = None
+            full_name_csv = None
+            location_csv = None
+
+            for email in resume_emails:
+                if email in csv_lookup:
+                    match_info = csv_lookup[email][0]
+                    candidate_id_csv = match_info["candidate_id"]
+                    full_name_csv = match_info["full_name"]
+                    location_csv = match_info["location"]
+                    break
+
+            json_data["candidate_id"] = candidate_id_csv
+            json_data["full_name"] = full_name_csv
+            json_data["location"] = location_csv
+
+            emails_key = tuple(sorted(resume_emails))
             phones_key = tuple(sorted(json_data.get("phones", [])))
             
             if not emails_key and not phones_key:
@@ -203,7 +260,7 @@ def main():
         except Exception as e:
             print(f"Failed to process {filename}: {e}")
 
-    all_students_data = list(unique_candidates.values())
+    all_students_data = [reorder_keys(v) for v in unique_candidates.values()]
 
     os.makedirs("out", exist_ok=True)
     with open("out/result.json", "w") as file:

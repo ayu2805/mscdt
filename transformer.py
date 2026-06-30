@@ -213,12 +213,26 @@ def get_iso_alpha2(location_string):
 def format_e164(phone_string, country_code):
     if not phone_string:
         return None
+        
+    cleaned_digits = re.sub(r'\D', '', phone_string)
+    digit_count = len(cleaned_digits)
+    
+    if not (2 < digit_count < 16):
+        return phone_string
+        
     try:
         parsed_number = phonenumbers.parse(phone_string, country_code)
-        if phonenumbers.is_valid_number(parsed_number):
-            return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
+        return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
     except phonenumbers.NumberParseException:
-        pass
+        if country_code and not phone_string.startswith('+'):
+            try:
+                from phonenumbers.phonenumberutil import country_code_for_region
+                calling_code = country_code_for_region(country_code)
+                if calling_code > 0:
+                    alt_parsed = phonenumbers.parse(f"+{calling_code}{phone_string}", None)
+                    return phonenumbers.format_number(alt_parsed, phonenumbers.PhoneNumberFormat.E164)
+            except Exception:
+                pass
     return phone_string
 
 def reorder_keys(data):

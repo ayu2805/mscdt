@@ -21,5 +21,27 @@
     ],
     "years_experience": null,
     "experience": null,
-    "education_background": null
+    "education_background": null,
+    "github_profile_data": {
+        "name": "Ayushmaan Padhi",
+        "bio": null,
+        "repositories": [
+            {
+                "html_url": "https://github.com/ayu2805/ayu2805",
+                "language": null
+            },
+            {
+                "html_url": "https://github.com/ayu2805/lss",
+                "language": "Shell"
+            },
+            {
+                "html_url": "https://github.com/ayu2805/mscdt",
+                "language": null
+            },
+            {
+                "html_url": "https://github.com/ayu2805/wss",
+                "language": "PowerShell"
+            }
+        ]
+    }
 }

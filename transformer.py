@@ -1,6 +1,8 @@
 import argparse
 import json
 import re
+import urllib.request
+import urllib.error
 import ollama
 import pypdf
 
@@ -14,6 +16,42 @@ def read_pdf(file_path):
             full_text.append(text)
             
     return "\n".join(full_text)
+
+def extract_github_username(links):
+    for link in links:
+        match = re.search(r'github\.com/([a-zA-Z0-9\-]+)', link, re.IGNORECASE)
+        if match:
+            username = match.group(1)
+            if username.lower() not in ['settings', 'repositories', 'explore', 'trending']:
+                return username
+    return None
+
+def fetch_github_data(username):
+    headers = {"User-Agent": "Python-Urllib-Resume-Parser"}
+    github_data = {"name": None, "bio": None, "repositories": []}
+    
+    try:
+        user_req = urllib.request.Request(f"https://api.github.com/users/{username}", headers=headers)
+        with urllib.request.urlopen(user_req) as response:
+            user_info = json.loads(response.read().decode())
+            github_data["name"] = user_info.get("name")
+            github_data["bio"] = user_info.get("bio")
+    except urllib.error.URLError:
+        pass
+
+    try:
+        repos_req = urllib.request.Request(f"https://api.github.com/users/{username}/repos", headers=headers)
+        with urllib.request.urlopen(repos_req) as response:
+            repos_info = json.loads(response.read().decode())
+            for repo in repos_info:
+                github_data["repositories"].append({
+                    "html_url": repo.get("html_url"),
+                    "language": repo.get("language")
+                })
+    except urllib.error.URLError:
+        pass
+
+    return github_data
 
 def extract_resume_data_regex(resume_text):
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -105,6 +143,12 @@ def main():
         json_data = extract_resume_data_ai(resume_text)
     else:
         json_data = extract_resume_data_regex(resume_text)
+        
+    github_username = extract_github_username(json_data.get("links", []))
+    if github_username:
+        json_data["github_profile_data"] = fetch_github_data(github_username)
+    else:
+        json_data["github_profile_data"] = None
         
     with open("result.json", "w") as file:
         json.dump(json_data, file, indent=4)

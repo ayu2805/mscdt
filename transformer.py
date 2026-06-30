@@ -29,7 +29,11 @@ def extract_github_username(links):
     return None
 
 def fetch_github_data(username):
+    token = os.environ.get("GITHUB_TOKEN")
     headers = {"User-Agent": "Python-Urllib-Resume-Parser"}
+    if token:
+        headers["Authorization"] = f"token {token}"
+        
     github_data = {"name": None, "bio": None, "repositories": []}
     
     try:

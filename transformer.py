@@ -35,7 +35,7 @@ def fetch_github_data(username):
     token = os.environ.get("GITHUB_TOKEN")
     headers = {"User-Agent": "Python-Urllib-Resume-Parser"}
     if token:
-        headers["Authorization"] = f"token {token}"
+        headers["Authorization"] = f"Bearer {token}"
         
     github_data = {"name": None, "bio": None, "repositories": []}
     

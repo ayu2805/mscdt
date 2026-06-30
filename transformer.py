@@ -150,7 +150,7 @@ def main():
     else:
         json_data["github_profile_data"] = None
         
-    with open("result.json", "w") as file:
+    with open("out/result.json", "w") as file:
         json.dump(json_data, file, indent=4)
 
 if __name__ == "__main__":

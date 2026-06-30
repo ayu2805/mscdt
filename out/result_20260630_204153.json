@@ -1,0 +1,241 @@
+[
+    {
+        "candidate_id": "CAND00000001",
+        "full_name": "Ayushmaan Padhi",
+        "emails": "mygmail@gmail.com",
+        "phones": [
+            "+911234567890",
+            "+919337158919"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000002",
+        "full_name": "Neha Sharma",
+        "emails": "neha.sharma@gmail.com",
+        "phones": [
+            "+919123456789",
+            "+919898989898"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000004",
+        "full_name": "Emily Carter",
+        "emails": "e.carter@proton.me",
+        "phones": [
+            "+441234567890",
+            "+447911223344"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000005",
+        "full_name": "Diego Ramirez",
+        "emails": "diego.ramirez@gmail.com",
+        "phones": [
+            "+525512345678"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000006",
+        "full_name": "Mei Lin",
+        "emails": "mei.lin@gmail.com",
+        "phones": [
+            "+656987654321",
+            "+6598765432"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000007",
+        "full_name": "Aisha Khan",
+        "emails": "aisha.khan@gmail.com",
+        "phones": [
+            "+13012345678"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000008",
+        "full_name": "Noah Williams",
+        "emails": "noah.williams@gmail.com",
+        "phones": [
+            "+12025550123",
+            "+14155550111"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000010",
+        "full_name": "Kenji Sato",
+        "emails": "k.sato@outlook.com",
+        "phones": [
+            "+819012345678"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000011",
+        "full_name": "Sofia Rossi",
+        "emails": "sofia.rossi@gmail.com",
+        "phones": [
+            "+393401234567"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000012",
+        "full_name": "Ahmed El-Sayed",
+        "emails": "a.elsayed@outlook.com",
+        "phones": [
+            "+201001122334",
+            "+201550667788"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000013",
+        "full_name": "Grace Thompson",
+        "emails": "g.thompson@proton.me",
+        "phones": [
+            "+16175550123",
+            "+17815550199"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000014",
+        "full_name": "Ibrahim Hussein",
+        "emails": "ibrahim.hussein@gmail.com",
+        "phones": [
+            "+966501234567"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000015",
+        "full_name": "Harper Johnson",
+        "emails": "harper.johnson@gmail.com",
+        "phones": [
+            "+16465550134"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000016",
+        "full_name": "Mohammad Ali",
+        "emails": "mohammad.ali@gmail.com",
+        "phones": [
+            "+971501234567",
+            "+971551234568"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000017",
+        "full_name": "Lina Johansson",
+        "emails": "lina.j@gmail.com",
+        "phones": [
+            "+46701234567",
+            "+46711234568"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000018",
+        "full_name": "Benjamin M\u00fcller",
+        "emails": "benjamin.mueller@gmail.com",
+        "phones": [
+            "+494915123456789"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000019",
+        "full_name": "Priya Nair",
+        "emails": "priya.nair@gmail.com",
+        "phones": [
+            "+918123456789",
+            "+919345678901"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000020",
+        "full_name": "Victor Nguyen",
+        "emails": "victor.n@proton.me",
+        "phones": [
+            "+84901234567"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000021",
+        "full_name": "Riya Gupta",
+        "emails": "riya.gupta@gmail.com",
+        "phones": [
+            "+919001234567"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000022",
+        "full_name": "Santiago P\u00e9rez",
+        "emails": "s.perez@outlook.com",
+        "phones": [
+            "+521234567890",
+            "+52551234567891"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000023",
+        "full_name": "Ava Brown",
+        "emails": "ava.brown@gmail.com",
+        "phones": [
+            "+14155550144"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000024",
+        "full_name": "Oliver Smith",
+        "emails": "oliver.smith@gmail.com",
+        "phones": [
+            "+353851234567",
+            "+353861234568"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000025",
+        "full_name": "Farah Siddiqui",
+        "emails": "farah.siddiqui@gmail.com",
+        "phones": [
+            "+971501112223"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000026",
+        "full_name": "Tariq Abdullah",
+        "emails": "tariq.abdullah@gmail.com",
+        "phones": [
+            "+97433123456"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000027",
+        "full_name": "Natalia Kowalska",
+        "emails": "nat.kowalska@outlook.com",
+        "phones": [
+            "+48123456789",
+            "+48765432109"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000028",
+        "full_name": "Simon Dubois",
+        "emails": "simon.dubois@gmail.com",
+        "phones": [
+            "+33123456789",
+            "+33698765432"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000029",
+        "full_name": "Amir Hosseini",
+        "emails": "amir.h@proton.me",
+        "phones": [
+            "+989121234567",
+            "+989131234568"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000030",
+        "full_name": "Zaara Malik",
+        "emails": "zaara.malik@gmail.com",
+        "phones": [
+            "+923001234567"
+        ]
+    }
+]

@@ -154,7 +154,7 @@ def calculate_data_quality(data):
     return score
 
 def load_csv_data(csv_path):
-    csv_lookup = {"by_email": {}, "by_phone": {}}
+    csv_lookup = {"by_email": {}, "by_phone": {}, "all_payloads": []}
     if not os.path.exists(csv_path):
         return csv_lookup
 
@@ -175,6 +175,8 @@ def load_csv_data(csv_path):
                 "emails": emails,
                 "phones": phones
             }
+            
+            csv_lookup["all_payloads"].append(payload)
             
             for email in emails:
                 if email not in csv_lookup["by_email"]:
@@ -232,12 +234,9 @@ def main():
         return
 
     pdf_files = glob.glob(os.path.join(args.dir_path, "*.pdf"))
-    if not pdf_files:
-        print(f"No PDF files found in {args.dir_path}")
-        return
-
     csv_lookup = load_csv_data(args.csv_path)
     unique_candidates = {}
+    matched_csv_payloads = set()
 
     for file_path in pdf_files:
         filename = os.path.basename(file_path)
@@ -266,29 +265,33 @@ def main():
             csv_emails = []
             csv_phones = []
             matched = False
+            matched_payload = None
 
             for email in resume_emails:
                 if email in csv_lookup["by_email"]:
-                    match_info = csv_lookup["by_email"][email][0]
-                    candidate_id_csv = match_info["candidate_id"]
-                    full_name_csv = match_info["full_name"]
-                    location_csv = match_info["location"]
-                    csv_emails = match_info["emails"]
-                    csv_phones = match_info["phones"]
+                    matched_payload = csv_lookup["by_email"][email][0]
+                    candidate_id_csv = matched_payload["candidate_id"]
+                    full_name_csv = matched_payload["full_name"]
+                    location_csv = matched_payload["location"]
+                    csv_emails = matched_payload["emails"]
+                    csv_phones = matched_payload["phones"]
                     matched = True
                     break
 
             if not matched:
                 for phone in resume_phones:
                     if phone in csv_lookup["by_phone"]:
-                        match_info = csv_lookup["by_phone"][phone][0]
-                        candidate_id_csv = match_info["candidate_id"]
-                        full_name_csv = match_info["full_name"]
-                        location_csv = match_info["location"]
-                        csv_emails = match_info["emails"]
-                        csv_phones = match_info["phones"]
+                        matched_payload = csv_lookup["by_phone"][phone][0]
+                        candidate_id_csv = matched_payload["candidate_id"]
+                        full_name_csv = matched_payload["full_name"]
+                        location_csv = matched_payload["location"]
+                        csv_emails = matched_payload["emails"]
+                        csv_phones = matched_payload["phones"]
                         matched = True
                         break
+
+            if matched_payload:
+                matched_csv_payloads.add(id(matched_payload))
 
             country_iso = get_iso_alpha2(location_csv)
             
@@ -313,19 +316,44 @@ def main():
             emails_key = tuple(sorted(list(target_emails)))
             
             if not emails_key:
-                candidate_id = (filename,)
+                candidate_key = (filename,)
             else:
-                candidate_id = (emails_key,)
+                candidate_key = (emails_key,)
 
-            if candidate_id in unique_candidates:
-                existing_data = unique_candidates[candidate_id]
+            if candidate_key in unique_candidates:
+                existing_data = unique_candidates[candidate_key]
                 if calculate_data_quality(json_data) > calculate_data_quality(existing_data):
-                    unique_candidates[candidate_id] = json_data
+                    unique_candidates[candidate_key] = json_data
             else:
-                unique_candidates[candidate_id] = json_data
+                unique_candidates[candidate_key] = json_data
             
         except Exception as e:
             print(f"Failed to process {filename}: {e}")
+
+    for payload in csv_lookup["all_payloads"]:
+        if id(payload) not in matched_csv_payloads:
+            country_iso = get_iso_alpha2(payload["location"])
+            formatted_phones = set()
+            for phone in payload["phones"]:
+                formatted_phones.add(format_e164(phone, country_iso))
+
+            unmatched_json_data = {
+                "candidate_id": payload["candidate_id"],
+                "full_name": payload["full_name"],
+                "emails": sorted([e.lower() for e in payload["emails"]]),
+                "phones": sorted(list(formatted_phones)),
+                "location": country_iso if country_iso else payload["location"],
+                "links": [],
+                "skills": None,
+                "years_experience": None,
+                "experience": None,
+                "education_background": None,
+                "github_profile_data": None
+            }
+            
+            emails_key = tuple(sorted([e.lower() for e in payload["emails"]]))
+            if emails_key and emails_key not in unique_candidates:
+                unique_candidates[emails_key] = unmatched_json_data
 
     all_students_data = [reorder_keys(v) for v in unique_candidates.values()]
 

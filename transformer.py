@@ -535,11 +535,14 @@ def main():
         except Exception as e:
             print(f"Projection error: {e}")
 
+    import datetime
     os.makedirs("out", exist_ok=True)
-    with open("out/result.json", "w") as file:
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    output_filename = f"out/result_{timestamp}.json"
+    with open(output_filename, "w") as file:
         json.dump(all_students_data, file, indent=4)
         
-    print(f"Successfully saved data for {len(all_students_data)} unique students to out/result.json")
+    print(f"Successfully saved data for {len(all_students_data)} unique students to {output_filename}")
 
 if __name__ == "__main__":
     main()

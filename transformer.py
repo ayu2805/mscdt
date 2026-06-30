@@ -113,7 +113,7 @@ def extract_resume_data_regex(resume_text):
         "links": links,
         "skills": skills if skills else None,
         "experience": None,
-        "education_background": None
+        "education": None
     }
 
 def extract_resume_data_ai(resume_text):
@@ -123,8 +123,8 @@ def extract_resume_data_ai(resume_text):
         "'emails' (list of strings), 'phones' (list of strings), 'links' (list of Github Profile and LinkedIn URLs), "
         "'skills' (list of strings or null), "
         "'experience' (list of objects or null, where each object has 'role' (string), 'start_date' (MM-DD-YYYY), 'end_date' (MM-DD-YYYY), 'company' (string), and 'summary' (string)), "
-        "'education_background' (list of objects or null, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n"
-        "If skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n"
+        "'education' (list of objects or null, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n"
+        "If skills, experience, or education are not found or cannot be extracted, set their values to null. \n"
         "Ensure all email entries in the 'emails' array strictly match standard email formats. If an email is improperly formatted or invalid, exclude it from the list.\n\n"
         "Resume Text: \n" + resume_text
     )
@@ -138,7 +138,7 @@ def extract_resume_data_ai(resume_text):
     
     data = json.loads(response.message.content)
     
-    fixed_keys = ["skills", "experience", "education_background"]
+    fixed_keys = ["skills", "experience", "education"]
     for key in fixed_keys:
         if key not in data or not data[key]:
             data[key] = None
@@ -153,7 +153,7 @@ def extract_resume_data_ai(resume_text):
 
 def calculate_data_quality(data):
     score = 0
-    for key in ["skills", "experience", "education_background"]:
+    for key in ["skills", "experience", "education"]:
         val = data.get(key)
         if isinstance(val, list):
             score += len(val)
@@ -168,7 +168,7 @@ def load_csv_data(csv_path):
 
     with open(csv_path, mode='r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
-        for row in reader:
+        for idx, row in enumerate(reader, start=2):
             candidate_id = row.get('candidate_id', '').strip()
             full_name = row.get('full_name', '').strip()
             location = row.get('location', '').strip()
@@ -181,7 +181,8 @@ def load_csv_data(csv_path):
                 "full_name": full_name,
                 "location": location,
                 "emails": emails if emails else [None],
-                "phones": phones
+                "phones": phones,
+                "row_index": idx
             }
             
             csv_lookup["all_payloads"].append(payload)
@@ -235,8 +236,8 @@ def format_e164(phone_string, country_code):
 def reorder_keys(data):
     ordered = {}
     for k in ["candidate_id", "full_name", "emails", "phones", "location",
-              "links", "skills", "experience", "education_background",
-              "github_profile_data"]:
+              "links", "skills", "experience", "education",
+              "github_profile_data", "provenance"]:
         if k in data:
             ordered[k] = data[k]
     for k in data:
@@ -312,6 +313,45 @@ def main():
                         matched = True
                         break
 
+            provenance = []
+
+            if candidate_id_csv:
+                provenance.append({"field": "candidate_id", "source": f"CSV: Row {matched_payload['row_index']}; Column candidate_id"})
+            else:
+                provenance.append({"field": "candidate_id", "source": "not_in_csv"})
+
+            if full_name_csv:
+                provenance.append({"field": "full_name", "source": f"CSV: Row {matched_payload['row_index']}; Column full_name"})
+            else:
+                provenance.append({"field": "full_name", "source": "not_in_csv"})
+
+            if location_csv:
+                provenance.append({"field": "location", "source": f"CSV: Row {matched_payload['row_index']}; Column location"})
+            else:
+                provenance.append({"field": "location", "source": "not_in_csv"})
+
+            if resume_emails:
+                provenance.append({"field": "emails", "source": f"Resume: {filename}"})
+            elif csv_emails:
+                provenance.append({"field": "emails", "source": f"CSV: Row {matched_payload['row_index']}; Column emails"})
+            else:
+                provenance.append({"field": "emails", "source": "not_in_resume"})
+
+            if resume_phones:
+                provenance.append({"field": "phones", "source": f"Resume: {filename}"})
+            elif csv_phones:
+                provenance.append({"field": "phones", "source": f"CSV: Row {matched_payload['row_index']}; Column phones"})
+            else:
+                provenance.append({"field": "phones", "source": "not_in_resume"})
+
+            for field in ["links", "skills", "experience", "education"]:
+                if json_data.get(field):
+                    provenance.append({"field": field, "source": f"Resume: {filename}"})
+                else:
+                    provenance.append({"field": field, "source": "not_in_resume"})
+
+            json_data["provenance"] = provenance
+
             if matched_payload:
                 matched_csv_payloads.add(id(matched_payload))
 
@@ -364,6 +404,18 @@ def main():
 
             payload_emails = [e.lower() for e in payload["emails"] if e and is_valid_email_format(e)]
 
+            unmatched_provenance = [
+                {"field": "candidate_id", "source": f"CSV: Row {payload['row_index']}; Column candidate_id" if payload["candidate_id"] else "not_in_csv"},
+                {"field": "full_name", "source": f"CSV: Row {payload['row_index']}; Column full_name" if payload["full_name"] else "not_in_csv"},
+                {"field": "emails", "source": f"CSV: Row {payload['row_index']}; Column emails" if payload_emails else "not_in_csv"},
+                {"field": "phones", "source": f"CSV: Row {payload['row_index']}; Column phones" if formatted_phones else "not_in_csv"},
+                {"field": "location", "source": f"CSV: Row {payload['row_index']}; Column location" if payload["location"] else "not_in_csv"},
+                {"field": "links", "source": "not_in_resume"},
+                {"field": "skills", "source": "not_in_resume"},
+                {"field": "experience", "source": "not_in_resume"},
+                {"field": "education", "source": "not_in_resume"}
+            ]
+
             unmatched_json_data = {
                 "candidate_id": payload["candidate_id"],
                 "full_name": payload["full_name"],
@@ -373,8 +425,9 @@ def main():
                 "links": [],
                 "skills": None,
                 "experience": None,
-                "education_background": None,
-                "github_profile_data": None
+                "education": None,
+                "github_profile_data": None,
+                "provenance": unmatched_provenance
             }
             
             emails_key = tuple(sorted(payload_emails))

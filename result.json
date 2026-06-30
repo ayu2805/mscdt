@@ -6,22 +6,67 @@
         "+91 93371 58919"
     ],
     "links": [
-        "https://github.com/ayu2805",
-        "https://www.linkedin.com/in/ayu2805"
+        "https://www.linkedin.com/in/ayu2805",
+        "https://github.com/ayu2805"
     ],
+    "years_experience": 0.5,
     "skills": [
-        "python",
-        "java",
-        "c++",
-        "postgresql",
-        "mysql",
-        "github",
-        "linux",
-        "bash"
+        "Java",
+        "Python",
+        "C",
+        "C++",
+        "Bash",
+        "PowerShell",
+        "MySQL/MariaDB",
+        "PostgreSQL",
+        "Cloud Management",
+        "Version Control Systems",
+        "Linux Server Management",
+        "Windows Server Management",
+        "Computer Networking",
+        "Communication",
+        "Teamwork",
+        "Critical thinking",
+        "Time management",
+        "Leadership",
+        "Adaptability",
+        "English",
+        "Hindi",
+        "Odia"
     ],
-    "years_experience": null,
-    "experience": null,
-    "education_background": null,
+    "experience": [
+        {
+            "role": "Intern",
+            "start_date": "06-01-2025",
+            "end_date": "07-31-2025",
+            "company": "National Aluminium Company Limited",
+            "summary": "Developed a Resource Management System using the LAMP stack, enhancing web development and database integration skills. Focused on database management, networking, and data centre/disaster recovery operations. Gained insights into data security and disaster recovery best practices."
+        },
+        {
+            "role": "Intern",
+            "start_date": "11-01-2025",
+            "end_date": "11-01-2025",
+            "company": "Samsung PRISM Program",
+            "summary": "Engineered an AI-driven visual verification platform that automates screenshot capture for mobile and web applications to identify meaningful UI discrepancies. Leveraged open-source vision and language models to provide human-readable explanations of visual changes and classify them as bugs or expected updates. Optimized the quality assurance lifecycle by developing a React-based dashboard for interactive diff reviews, significantly reducing manual verification bottlenecks and false positives."
+        }
+    ],
+    "education_background": [
+        {
+            "degree": "Bachelor of Technology, CSE",
+            "institution": "Institute of Technical Education and Research, Siksha 'O' Anusandhan",
+            "summary": "CGPA: 9.41 till 5th Semester, Expected graduation: 2027"
+        },
+        {
+            "degree": "Senior School Education",
+            "institution": "Kendriya Vidyalaya, Rayagada",
+            "summary": "CBSE, Percentage: 78.16%, Year: 2023"
+        },
+        {
+            "degree": "Secondary School Education",
+            "institution": "Kendriya Vidyalaya, Rayagada",
+            "summary": "CBSE, Percentage: 92.5%, Year: 2021"
+        }
+    ],
     "github_profile_data": {
         "name": "Ayushmaan Padhi",
         "bio": null,
@@ -36,7 +81,7 @@
             },
             {
                 "html_url": "https://github.com/ayu2805/mscdt",
-                "language": null
+                "language": "Python"
             },
             {
                 "html_url": "https://github.com/ayu2805/wss",

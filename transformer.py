@@ -112,7 +112,6 @@ def extract_resume_data_regex(resume_text):
         "phones": phones,
         "links": links,
         "skills": skills if skills else None,
-        "years_experience": None,
         "experience": None,
         "education_background": None
     }
@@ -122,10 +121,10 @@ def extract_resume_data_ai(resume_text):
         "Extract the following information from the resume text below. "
         "Return a strict JSON object with these exact keys: "
         "'emails' (list of strings), 'phones' (list of strings), 'links' (list of Github Profile and LinkedIn URLs), "
-        "'years_experience' (float or null, note: this will automatically be calculated based on the time periods in the experience section), 'skills' (list of strings or null), "
+        "'skills' (list of strings or null), "
         "'experience' (list of objects or null, where each object has 'role' (string), 'start_date' (MM-DD-YYYY), 'end_date' (MM-DD-YYYY), 'company' (string), and 'summary' (string)), "
         "'education_background' (list of objects or null, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n"
-        "If years_experience, skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n"
+        "If skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n"
         "Ensure all email entries in the 'emails' array strictly match standard email formats. If an email is improperly formatted or invalid, exclude it from the list.\n\n"
         "Resume Text: \n" + resume_text
     )
@@ -139,7 +138,7 @@ def extract_resume_data_ai(resume_text):
     
     data = json.loads(response.message.content)
     
-    fixed_keys = ["years_experience", "skills", "experience", "education_background"]
+    fixed_keys = ["skills", "experience", "education_background"]
     for key in fixed_keys:
         if key not in data or not data[key]:
             data[key] = None
@@ -158,8 +157,6 @@ def calculate_data_quality(data):
         val = data.get(key)
         if isinstance(val, list):
             score += len(val)
-    if data.get("years_experience") is not None:
-        score += 1
     if data.get("github_profile_data"):
         score += 1
     return score
@@ -238,7 +235,7 @@ def format_e164(phone_string, country_code):
 def reorder_keys(data):
     ordered = {}
     for k in ["candidate_id", "full_name", "emails", "phones", "location",
-              "links", "skills", "years_experience", "experience", "education_background",
+              "links", "skills", "experience", "education_background",
               "github_profile_data"]:
         if k in data:
             ordered[k] = data[k]
@@ -375,7 +372,6 @@ def main():
                 "location": country_iso if country_iso else payload["location"],
                 "links": [],
                 "skills": None,
-                "years_experience": None,
                 "experience": None,
                 "education_background": None,
                 "github_profile_data": None

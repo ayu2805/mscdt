@@ -60,7 +60,10 @@ def extract_resume_data_regex(resume_text):
         "emails": emails,
         "phones": phones,
         "links": links,
-        "skills": skills
+        "skills": skills if skills else None,
+        "years_experience": None,
+        "experience": None,
+        "education_background": None
     }
 
 def extract_resume_data_ai(resume_text):
@@ -68,9 +71,10 @@ def extract_resume_data_ai(resume_text):
         "Extract the following information from the resume text below. "
         "Return a strict JSON object with these exact keys: "
         "'emails' (list of strings), 'phones' (list of strings), 'links' (list of Github Profile and LinkedIn URLs), "
-        "'years_experience' (float or null, note: this will automatically be calculated based on the time periods in the experience section), 'skills' (list of strings), "
-        "'experience' (list of objects, where each object has 'role' (string), 'start_date' (MM-DD-YYYY), 'end_date' (MM-DD-YYYY), 'company' (string), and 'summary' (string)), "
-        "'education_background' (list of objects, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n\n"
+        "'years_experience' (float or null, note: this will automatically be calculated based on the time periods in the experience section), 'skills' (list of strings or null), "
+        "'experience' (list of objects or null, where each object has 'role' (string), 'start_date' (MM-DD-YYYY), 'end_date' (MM-DD-YYYY), 'company' (string), and 'summary' (string)), "
+        "'education_background' (list of objects or null, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n"
+        "If years_experience, skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n\n"
         "Resume Text: \n" + resume_text
     )
 
@@ -81,7 +85,14 @@ def extract_resume_data_ai(resume_text):
         options={"temperature": 0.0}
     )
     
-    return json.loads(response.message.content)
+    data = json.loads(response.message.content)
+    
+    fixed_keys = ["years_experience", "skills", "experience", "education_background"]
+    for key in fixed_keys:
+        if key not in data or not data[key]:
+            data[key] = None
+            
+    return data
 
 def main():
     parser = argparse.ArgumentParser()

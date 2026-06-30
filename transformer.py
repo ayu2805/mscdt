@@ -6,7 +6,6 @@ import urllib.error
 import os
 import glob
 import csv
-import ollama
 import pypdf
 import pycountry
 import phonenumbers
@@ -117,6 +116,7 @@ def extract_resume_data_regex(resume_text):
     }
 
 def extract_resume_data_ai(resume_text):
+    import ollama
     prompt = (
         "Extract the following information from the resume text below. "
         "Return a strict JSON object with these exact keys: "

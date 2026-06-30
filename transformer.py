@@ -62,6 +62,10 @@ def fetch_github_data(username):
 
     return github_data
 
+def is_valid_email_format(email):
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return bool(re.match(email_pattern, email))
+
 def extract_resume_data_regex(resume_text):
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
     phone_pattern = r'\+?\d[\d\-\s\(\)]{8,}\d'
@@ -104,7 +108,7 @@ def extract_resume_data_regex(resume_text):
             skills.append(skill)
             
     return {
-        "emails": emails,
+        "emails": emails if emails else [None],
         "phones": phones,
         "links": links,
         "skills": skills if skills else None,
@@ -121,7 +125,8 @@ def extract_resume_data_ai(resume_text):
         "'years_experience' (float or null, note: this will automatically be calculated based on the time periods in the experience section), 'skills' (list of strings or null), "
         "'experience' (list of objects or null, where each object has 'role' (string), 'start_date' (MM-DD-YYYY), 'end_date' (MM-DD-YYYY), 'company' (string), and 'summary' (string)), "
         "'education_background' (list of objects or null, where each object has 'degree' (string), 'institution' (string), and 'summary' (string)). \n"
-        "If years_experience, skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n\n"
+        "If years_experience, skills, experience, or education_background are not found or cannot be extracted, set their values to null. \n"
+        "Ensure all email entries in the 'emails' array strictly match standard email formats. If an email is improperly formatted or invalid, exclude it from the list.\n\n"
         "Resume Text: \n" + resume_text
     )
 
@@ -138,6 +143,12 @@ def extract_resume_data_ai(resume_text):
     for key in fixed_keys:
         if key not in data or not data[key]:
             data[key] = None
+            
+    if "emails" in data and isinstance(data["emails"], list):
+        valid_emails = [e for e in data["emails"] if is_valid_email_format(str(e))]
+        data["emails"] = valid_emails if valid_emails else [None]
+    else:
+        data["emails"] = [None]
             
     return data
 
@@ -165,14 +176,14 @@ def load_csv_data(csv_path):
             full_name = row.get('full_name', '').strip()
             location = row.get('location', '').strip()
             
-            emails = [e.strip().lower() for e in row.get('emails', '').split(',') if e.strip()]
+            emails = [e.strip().lower() for e in row.get('emails', '').split(',') if e.strip() and is_valid_email_format(e.strip())]
             phones = [p.strip() for p in row.get('phones', '').split(',') if p.strip()]
             
             payload = {
                 "candidate_id": candidate_id,
                 "full_name": full_name,
                 "location": location,
-                "emails": emails,
+                "emails": emails if emails else [None],
                 "phones": phones
             }
             
@@ -256,7 +267,7 @@ def main():
             else:
                 json_data["github_profile_data"] = None
 
-            resume_emails = [e.lower() for e in json_data.get("emails", [])]
+            resume_emails = [e.lower() for e in json_data.get("emails", []) if e and is_valid_email_format(e)]
             resume_phones = json_data.get("phones", []) if json_data.get("phones") else []
 
             candidate_id_csv = None
@@ -273,7 +284,7 @@ def main():
                     candidate_id_csv = matched_payload["candidate_id"]
                     full_name_csv = matched_payload["full_name"]
                     location_csv = matched_payload["location"]
-                    csv_emails = matched_payload["emails"]
+                    csv_emails = [e for e in matched_payload["emails"] if e]
                     csv_phones = matched_payload["phones"]
                     matched = True
                     break
@@ -285,7 +296,7 @@ def main():
                         candidate_id_csv = matched_payload["candidate_id"]
                         full_name_csv = matched_payload["full_name"]
                         location_csv = matched_payload["location"]
-                        csv_emails = matched_payload["emails"]
+                        csv_emails = [e for e in matched_payload["emails"] if e]
                         csv_phones = matched_payload["phones"]
                         matched = True
                         break
@@ -301,8 +312,11 @@ def main():
 
             target_emails = set(resume_emails)
             for e in csv_emails:
-                target_emails.add(e.lower())
-            json_data["emails"] = sorted(list(target_emails))
+                if e and is_valid_email_format(e):
+                    target_emails.add(e.lower())
+            
+            final_emails = sorted(list(target_emails))
+            json_data["emails"] = final_emails if final_emails else [None]
 
             target_phones = set(resume_phones)
             for p in csv_phones:
@@ -313,7 +327,7 @@ def main():
                 formatted_phones.add(format_e164(phone, country_iso))
             json_data["phones"] = sorted(list(formatted_phones))
 
-            emails_key = tuple(sorted(list(target_emails)))
+            emails_key = tuple(sorted([e for e in final_emails if e]))
             
             if not emails_key:
                 candidate_key = (filename,)
@@ -337,10 +351,12 @@ def main():
             for phone in payload["phones"]:
                 formatted_phones.add(format_e164(phone, country_iso))
 
+            payload_emails = [e.lower() for e in payload["emails"] if e and is_valid_email_format(e)]
+
             unmatched_json_data = {
                 "candidate_id": payload["candidate_id"],
                 "full_name": payload["full_name"],
-                "emails": sorted([e.lower() for e in payload["emails"]]),
+                "emails": sorted(payload_emails) if payload_emails else [None],
                 "phones": sorted(list(formatted_phones)),
                 "location": country_iso if country_iso else payload["location"],
                 "links": [],
@@ -351,9 +367,11 @@ def main():
                 "github_profile_data": None
             }
             
-            emails_key = tuple(sorted([e.lower() for e in payload["emails"]]))
+            emails_key = tuple(sorted(payload_emails))
             if emails_key and emails_key not in unique_candidates:
                 unique_candidates[emails_key] = unmatched_json_data
+            elif not emails_key:
+                unique_candidates[(payload["candidate_id"],)] = unmatched_json_data
 
     all_students_data = [reorder_keys(v) for v in unique_candidates.values()]
 

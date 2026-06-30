@@ -134,6 +134,18 @@ def extract_resume_data_ai(resume_text):
             
     return data
 
+def calculate_data_quality(data):
+    score = 0
+    for key in ["skills", "experience", "education_background"]:
+        val = data.get(key)
+        if isinstance(val, list):
+            score += len(val)
+    if data.get("years_experience") is not None:
+        score += 1
+    if data.get("github_profile_data"):
+        score += 1
+    return score
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("dir_path", help="Path to the directory containing PDF resumes")
@@ -149,11 +161,10 @@ def main():
         print(f"No PDF files found in {args.dir_path}")
         return
 
-    all_students_data = {}
+    unique_candidates = {}
 
     for file_path in pdf_files:
         filename = os.path.basename(file_path)
-        student_name = os.path.splitext(filename)[0]
         print(f"Processing: {filename}")
 
         try:
@@ -169,17 +180,32 @@ def main():
                 json_data["github_profile_data"] = fetch_github_data(github_username)
             else:
                 json_data["github_profile_data"] = None
-                
-            all_students_data[student_name] = json_data
+
+            emails_key = tuple(sorted([e.lower() for e in json_data.get("emails", [])]))
+            phones_key = tuple(sorted(json_data.get("phones", [])))
+            
+            if not emails_key and not phones_key:
+                candidate_id = (filename,)
+            else:
+                candidate_id = (emails_key, phones_key)
+
+            if candidate_id in unique_candidates:
+                existing_data = unique_candidates[candidate_id]
+                if calculate_data_quality(json_data) > calculate_data_quality(existing_data):
+                    unique_candidates[candidate_id] = json_data
+            else:
+                unique_candidates[candidate_id] = json_data
             
         except Exception as e:
             print(f"Failed to process {filename}: {e}")
+
+    all_students_data = list(unique_candidates.values())
 
     os.makedirs("out", exist_ok=True)
     with open("out/result.json", "w") as file:
         json.dump(all_students_data, file, indent=4)
         
-    print(f"Successfully saved data for {len(all_students_data)} students to out/result.json")
+    print(f"Successfully saved data for {len(all_students_data)} unique students to out/result.json")
 
 if __name__ == "__main__":
     main()

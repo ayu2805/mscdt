@@ -1,4 +1,6 @@
+import argparse
 import json
+import re
 import ollama
 import pypdf
 
@@ -13,7 +15,55 @@ def read_pdf(file_path):
             
     return "\n".join(full_text)
 
-def extract_resume_data(resume_text):
+def extract_resume_data_regex(resume_text):
+    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    phone_pattern = r'\+?\d[\d\-\s\(\)]{8,}\d'
+    link_pattern = r'\b(?:https?://)?(?:www\.)?(?:linkedin\.com|github\.com)[^\s]*'
+    
+    emails = list(set(re.findall(email_pattern, resume_text)))
+    phones = list(set(re.findall(phone_pattern, resume_text)))
+    raw_links = re.findall(link_pattern, resume_text)
+
+    normalized_links = set()
+    for link in raw_links:
+        github_match = re.search(r'(?:github\.com)/([a-zA-Z0-9\-]+)', link, re.IGNORECASE)
+        if github_match:
+            username = github_match.group(1)
+            normalized_links.add(f"https://github.com/{username}")
+        else:
+            if not link.startswith(('http://', 'https://')):
+                link = 'https://' + link
+            normalized_links.add(link.rstrip('/.,-'))
+            
+    links = list(normalized_links)
+    
+    common_skills = [
+        "python", "javascript", "typescript", "java", "c++", "c#", "go", "rust", "ruby", "php",
+        "sql", "nosql", "postgresql", "mongodb", "mysql", "redis",
+        "html", "css", "react", "angular", "vue", "next.js", "node.js", "express", "django", "flask", "fastapi",
+        "aws", "azure", "gcp", "docker", "kubernetes", "cicd", "jenkins", "git", "github",
+        "machine learning", "deep learning", "nlp", "data science", "pandas", "numpy", "scikit-learn", "tensorflow", "pytorch",
+        "linux", "bash", "rest api", "graphql", "agile", "scrum"
+    ]
+    
+    skills = []
+    for skill in common_skills:
+        escaped_skill = re.escape(skill)
+        pattern = rf'\b{escaped_skill}\b'
+        if skill in ["c++", "c#", "node.js", "next.js"]:
+            pattern = rf'(?:^|[\s,.\-\/]){escaped_skill}(?:$|[\s,.\-\/])'
+            
+        if re.search(pattern, resume_text, re.IGNORECASE):
+            skills.append(skill)
+            
+    return {
+        "emails": emails,
+        "phones": phones,
+        "links": links,
+        "skills": skills
+    }
+
+def extract_resume_data_ai(resume_text):
     prompt = (
         "Extract the following information from the resume text below. "
         "Return a strict JSON object with these exact keys: "
@@ -28,15 +78,23 @@ def extract_resume_data(resume_text):
         model="minimax-m2.5:cloud",
         messages=[{"role": "user", "content": prompt}],
         format="json",
-        think=False
+        options={"temperature": 0.0}
     )
     
     return json.loads(response.message.content)
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--ai", action="store_true")
+    args = parser.parse_args()
+
     resume_text = read_pdf("C:/Users/ayu2805/Documents/mscdt/assets/resumes/Ayushmaan Padhi.pdf")
-    json_data = extract_resume_data(resume_text)
     
+    if args.ai:
+        json_data = extract_resume_data_ai(resume_text)
+    else:
+        json_data = extract_resume_data_regex(resume_text)
+        
     with open("result.json", "w") as file:
         json.dump(json_data, file, indent=4)
 

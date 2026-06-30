@@ -233,28 +233,107 @@ def format_e164(phone_string, country_code):
                 pass
     return phone_string
 
-def reorder_keys(data):
-    ordered = {}
-    for k in ["candidate_id", "full_name", "emails", "phones", "location",
-              "links", "skills", "experience", "education",
-              "github_profile_data", "provenance"]:
-        if k in data:
-            ordered[k] = data[k]
-    for k in data:
-        if k not in ordered:
-            ordered[k] = data[k]
-    return ordered
+def resolve_path(data, path):
+    if not path:
+        return data
+    parts = re.split(r'\[|\]\.|\]', path)
+    parts = [p for p in parts if p]
+    current = data
+    for part in parts:
+        if current is None:
+            return None
+        if isinstance(current, list):
+            if part.isdigit():
+                idx = int(part)
+                if idx < len(current):
+                    current = current[idx]
+                else:
+                    return None
+            else:
+                current = [item.get(part) for item in current if isinstance(item, dict) and part in item]
+                if not current:
+                    return None
+        elif isinstance(current, dict):
+            current = current.get(part)
+        else:
+            return None
+    return current
+
+def validate_type(value, expected_type):
+    if value is None:
+        return True
+    if expected_type == "string":
+        if isinstance(value, str):
+            return True
+        if isinstance(value, list) and all(isinstance(v, str) for v in value):
+            return True
+    if expected_type == "array" and isinstance(value, list):
+        return True
+    if expected_type == "object" and isinstance(value, dict):
+        return True
+    if expected_type == "boolean" and isinstance(value, bool):
+        return True
+    if expected_type == "number" and isinstance(value, (int, float)):
+        return True
+    return False
+
+def apply_projection(canonical_data, config):
+    if not config:
+        return canonical_data
+    
+    projected_data = {}
+    on_missing = config.get("on_missing", "null")
+    
+    for field_def in config.get("fields", []):
+        target_path = field_def.get("path")
+        source_path = field_def.get("from", target_path)
+        expected_type = field_def.get("type")
+        normalize = field_def.get("normalize", False)
+        
+        if source_path.startswith("phones") and normalize:
+            source_path = source_path.replace("phones", "normalized_phones")
+            
+        value = resolve_path(canonical_data, source_path)
+        
+        if value is None or (isinstance(value, list) and not any(value)):
+            if on_missing == "error":
+                raise ValueError(f"Missing value for field: {target_path}")
+            elif on_missing == "omit":
+                continue
+            else:
+                projected_data[target_path] = None
+        else:
+            if expected_type and not validate_type(value, expected_type):
+                if on_missing == "error":
+                    raise TypeError(f"Type mismatch for {target_path}. Expected {expected_type}.")
+                elif on_missing == "omit":
+                    continue
+                else:
+                    projected_data[target_path] = None
+            else:
+                projected_data[target_path] = value
+                
+    if config.get("include_provenance", False):
+        projected_data["provenance"] = canonical_data.get("provenance")
+        
+    return projected_data
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("dir_path", help="Path to the directory containing PDF resumes")
-    parser.add_argument("csv_path", help="Path to the CSV file containing supplemental candidate data")
-    parser.add_argument("--ai", action="store_true", help="Use AI-driven extraction instead of regex")
+    parser.add_argument("dir_path")
+    parser.add_argument("csv_path")
+    parser.add_argument("--ai", action="store_true")
+    parser.add_argument("--config", help="Path to JSON config file for projection")
     args = parser.parse_args()
 
     if not os.path.isdir(args.dir_path):
         print(f"Error: {args.dir_path} is not a valid directory.")
         return
+
+    config = None
+    if args.config:
+        with open(args.config, 'r') as f:
+            config = json.load(f)
 
     pdf_files = glob.glob(os.path.join(args.dir_path, "*.pdf"))
     csv_lookup = load_csv_data(args.csv_path)
@@ -373,10 +452,11 @@ def main():
             for p in csv_phones:
                 target_phones.add(p)
             
+            json_data["phones"] = sorted(list(target_phones))
             formatted_phones = set()
             for phone in target_phones:
                 formatted_phones.add(format_e164(phone, country_iso))
-            json_data["phones"] = sorted(list(formatted_phones))
+            json_data["normalized_phones"] = sorted(list(formatted_phones))
 
             emails_key = tuple(sorted([e for e in final_emails if e]))
             
@@ -420,7 +500,8 @@ def main():
                 "candidate_id": payload["candidate_id"],
                 "full_name": payload["full_name"],
                 "emails": sorted(payload_emails) if payload_emails else [None],
-                "phones": sorted(list(formatted_phones)),
+                "phones": sorted(payload["phones"]),
+                "normalized_phones": sorted(list(formatted_phones)),
                 "location": country_iso if country_iso else payload["location"],
                 "links": [],
                 "skills": None,
@@ -436,7 +517,13 @@ def main():
             elif not emails_key:
                 unique_candidates[(payload["candidate_id"],)] = unmatched_json_data
 
-    all_students_data = [reorder_keys(v) for v in unique_candidates.values()]
+    all_students_data = []
+    for v in unique_candidates.values():
+        try:
+            projected = apply_projection(v, config)
+            all_students_data.append(projected)
+        except Exception as e:
+            print(f"Projection error: {e}")
 
     os.makedirs("out", exist_ok=True)
     with open("out/result.json", "w") as file:

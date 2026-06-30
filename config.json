@@ -1,10 +1,10 @@
 {
   "fields": [
-    { "path": "candidate_id", "type": "string" },
-    { "path": "full_name", "type": "string" },
-    { "path": "emails", "from": "emails[0]", "type": "string"},
+    { "path": "candidate_id", "type": "string", "required": true },
+    { "path": "full_name", "type": "string", "required": true },
+    { "path": "emails", "from": "emails[0]", "type": "string", "required": true},
     { "path": "phones", "from": "phones", "type": "string", "normalize": true }
   ],
   "include_provenance": false,
-  "on_missing": "error"
+  "on_missing": "null"
 }

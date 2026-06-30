@@ -277,6 +277,9 @@ def validate_type(value, expected_type):
         return True
     return False
 
+class SkipCandidateException(Exception):
+    pass
+
 def apply_projection(canonical_data, config):
     if not config:
         return canonical_data
@@ -289,6 +292,7 @@ def apply_projection(canonical_data, config):
         source_path = field_def.get("from", target_path)
         expected_type = field_def.get("type")
         normalize = field_def.get("normalize", False)
+        is_required = field_def.get("required", False)
         
         if source_path.startswith("phones") and normalize:
             source_path = source_path.replace("phones", "normalized_phones")
@@ -296,6 +300,8 @@ def apply_projection(canonical_data, config):
         value = resolve_path(canonical_data, source_path)
         
         if value is None or (isinstance(value, list) and not any(value)):
+            if is_required:
+                raise SkipCandidateException()
             if on_missing == "error":
                 raise ValueError(f"Missing value for field: {target_path}")
             elif on_missing == "omit":
@@ -304,6 +310,8 @@ def apply_projection(canonical_data, config):
                 projected_data[target_path] = None
         else:
             if expected_type and not validate_type(value, expected_type):
+                if is_required:
+                    raise SkipCandidateException()
                 if on_missing == "error":
                     raise TypeError(f"Type mismatch for {target_path}. Expected {expected_type}.")
                 elif on_missing == "omit":
@@ -522,6 +530,8 @@ def main():
         try:
             projected = apply_projection(v, config)
             all_students_data.append(projected)
+        except SkipCandidateException:
+            continue
         except Exception as e:
             print(f"Projection error: {e}")
 

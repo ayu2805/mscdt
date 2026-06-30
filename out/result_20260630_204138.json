@@ -1,0 +1,1841 @@
+[
+    {
+        "emails": [
+            "mygmail@gmail.com",
+            "padhiayushmaan@gmail.com"
+        ],
+        "phones": [
+            "+91 93371 58919",
+            "+919337158919",
+            "1234567890"
+        ],
+        "links": [
+            "www.linkedin.com/in/ayu2805",
+            "github.com/ayu2805"
+        ],
+        "skills": [
+            "Java",
+            "Python",
+            "C",
+            "C++",
+            "Bash",
+            "PowerShell",
+            "MySQL/MariaDB",
+            "PostgreSQL",
+            "Cloud Management",
+            "Version Control Systems",
+            "Linux Server Management",
+            "Windows Server Management",
+            "Computer Networking",
+            "Communication",
+            "Teamwork",
+            "Critical thinking",
+            "Time management",
+            "Leadership",
+            "Adaptability",
+            "English",
+            "Hindi",
+            "Odia"
+        ],
+        "experience": [
+            {
+                "role": "Intern",
+                "start_date": "06-2024",
+                "end_date": "07-2024",
+                "company": "National Aluminium Company Limited",
+                "summary": "Developed a Resource Management System using the LAMP stack, enhancing web development and database integration skills. Focused on database management, networking, and datacentre/disaster recovery operations. Gained insights into data security and disaster recovery best practices."
+            },
+            {
+                "role": "Intern",
+                "start_date": "11-2024",
+                "end_date": "Present",
+                "company": "Samsung PRISM Program",
+                "summary": "Engineered an AI-driven visual verification platform that automates screenshot capture for mobile and web applications to identify meaningful UI discrepancies. Leveraged open-source vision and language models to provide human-readable explanations of visual changes and classify them as bugs or expected updates. Optimized the quality assurance lifecycle by developing a React-based dashboard for interactive diff reviews, significantly reducing manual verification bottlenecks and false positives."
+            }
+        ],
+        "education": [
+            {
+                "degree": "Bachelor of Technology, CSE",
+                "institution": "Institute of Technical Education and Research, Siksha 'O' Anusandhan",
+                "summary": "CGPA: 9.41 till 5th Semester, Graduation: 2027"
+            },
+            {
+                "degree": "Senior School Education",
+                "institution": "Kendriya Vidyalaya, Rayagada, CBSE",
+                "summary": "Percentage: 78.16%, Year: 2023"
+            },
+            {
+                "degree": "Secondary School Education",
+                "institution": "Kendriya Vidyalaya, Rayagada, CBSE",
+                "summary": "Percentage: 92.5%, Year: 2021"
+            }
+        ],
+        "github_profile_data": {
+            "name": "Ayushmaan Padhi",
+            "bio": null,
+            "repositories": [
+                {
+                    "html_url": "https://github.com/ayu2805/ayu2805",
+                    "language": null
+                },
+                {
+                    "html_url": "https://github.com/ayu2805/lss",
+                    "language": "Shell"
+                },
+                {
+                    "html_url": "https://github.com/ayu2805/mscdt",
+                    "language": "Python"
+                },
+                {
+                    "html_url": "https://github.com/ayu2805/wss",
+                    "language": "PowerShell"
+                }
+            ]
+        },
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 2; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 2; Column full_name"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 2; Column location"
+            },
+            {
+                "field": "emails",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            },
+            {
+                "field": "phones",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            },
+            {
+                "field": "links",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            },
+            {
+                "field": "skills",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            },
+            {
+                "field": "experience",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            },
+            {
+                "field": "education",
+                "source": "Resume: Ayushmaan Padhi.pdf"
+            }
+        ],
+        "candidate_id": "CAND00000001",
+        "full_name": "Ayushmaan Padhi",
+        "location": "IN",
+        "normalized_phones": [
+            "+911234567890",
+            "+919337158919"
+        ]
+    },
+    {
+        "candidate_id": "CAND00000002",
+        "full_name": "Neha Sharma",
+        "emails": [
+            "neha.sharma@gmail.com",
+            "neha.shrma@outlook.com"
+        ],
+        "phones": [
+            "9123456789",
+            "9898989898"
+        ],
+        "normalized_phones": [
+            "+919123456789",
+            "+919898989898"
+        ],
+        "location": "IN",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 3; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 3; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 3; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 3; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 3; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000003",
+        "full_name": "Rahul Verma",
+        "emails": [
+            null
+        ],
+        "phones": [
+            "8877665544"
+        ],
+        "normalized_phones": [
+            "+918877665544"
+        ],
+        "location": "IN",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 4; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 4; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "not_in_csv"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 4; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 4; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000004",
+        "full_name": "Emily Carter",
+        "emails": [
+            "e.carter@proton.me",
+            "emily.carter@gmail.com"
+        ],
+        "phones": [
+            "441234567890",
+            "447911223344"
+        ],
+        "normalized_phones": [
+            "+441234567890",
+            "+447911223344"
+        ],
+        "location": "GB",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 5; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 5; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 5; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 5; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 5; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000005",
+        "full_name": "Diego Ramirez",
+        "emails": [
+            "diego.ramirez@gmail.com"
+        ],
+        "phones": [
+            "5512345678"
+        ],
+        "normalized_phones": [
+            "+525512345678"
+        ],
+        "location": "MX",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 6; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 6; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 6; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 6; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 6; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000006",
+        "full_name": "Mei Lin",
+        "emails": [
+            "mei.lin@gmail.com",
+            "meilin@outlook.com",
+            "mlin@icloud.com"
+        ],
+        "phones": [
+            "6598765432",
+            "6987654321"
+        ],
+        "normalized_phones": [
+            "+656987654321",
+            "+6598765432"
+        ],
+        "location": "SG",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 7; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 7; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 7; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 7; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 7; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000007",
+        "full_name": "Aisha Khan",
+        "emails": [
+            "aisha.khan@gmail.com"
+        ],
+        "phones": [
+            "3012345678"
+        ],
+        "normalized_phones": [
+            "+13012345678"
+        ],
+        "location": "US",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 8; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 8; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 8; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 8; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 8; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000008",
+        "full_name": "Noah Williams",
+        "emails": [
+            "noah.williams@gmail.com",
+            "noah@protonmail.com"
+        ],
+        "phones": [
+            "12025550123",
+            "14155550111"
+        ],
+        "normalized_phones": [
+            "+12025550123",
+            "+14155550111"
+        ],
+        "location": "US",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 9; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 9; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 9; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 9; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 9; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000009",
+        "full_name": "Chloe Martin",
+        "emails": [
+            null
+        ],
+        "phones": [
+            "33612345678"
+        ],
+        "normalized_phones": [
+            "+33612345678"
+        ],
+        "location": "FR",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 10; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 10; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "not_in_csv"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 10; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 10; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000010",
+        "full_name": "Kenji Sato",
+        "emails": [
+            "k.sato@outlook.com",
+            "kenji.sato@gmail.com"
+        ],
+        "phones": [
+            "819012345678"
+        ],
+        "normalized_phones": [
+            "+819012345678"
+        ],
+        "location": "JP",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 11; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 11; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 11; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 11; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 11; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000011",
+        "full_name": "Sofia Rossi",
+        "emails": [
+            "sofia.rossi@gmail.com"
+        ],
+        "phones": [
+            "393401234567"
+        ],
+        "normalized_phones": [
+            "+393401234567"
+        ],
+        "location": "IT",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 12; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 12; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 12; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 12; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 12; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000012",
+        "full_name": "Ahmed El-Sayed",
+        "emails": [
+            "a.elsayed@outlook.com",
+            "ahmed.elsayed@gmail.com"
+        ],
+        "phones": [
+            "201001122334",
+            "201550667788"
+        ],
+        "normalized_phones": [
+            "+201001122334",
+            "+201550667788"
+        ],
+        "location": "EG",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 13; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 13; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 13; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 13; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 13; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000013",
+        "full_name": "Grace Thompson",
+        "emails": [
+            "g.thompson@proton.me",
+            "grace.thompson@gmail.com"
+        ],
+        "phones": [
+            "6175550123",
+            "7815550199"
+        ],
+        "normalized_phones": [
+            "+16175550123",
+            "+17815550199"
+        ],
+        "location": "US",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 14; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 14; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 14; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 14; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 14; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000014",
+        "full_name": "Ibrahim Hussein",
+        "emails": [
+            "ibrahim.hussein@gmail.com"
+        ],
+        "phones": [
+            "966501234567"
+        ],
+        "normalized_phones": [
+            "+966501234567"
+        ],
+        "location": "SA",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 15; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 15; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 15; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 15; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 15; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000015",
+        "full_name": "Harper Johnson",
+        "emails": [
+            "harper.johnson@gmail.com"
+        ],
+        "phones": [
+            "6465550134"
+        ],
+        "normalized_phones": [
+            "+16465550134"
+        ],
+        "location": "US",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 16; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 16; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 16; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 16; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 16; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000016",
+        "full_name": "Mohammad Ali",
+        "emails": [
+            "mohammad.ali@gmail.com",
+            "mohammed.ali@outlook.com"
+        ],
+        "phones": [
+            "971501234567",
+            "971551234568"
+        ],
+        "normalized_phones": [
+            "+971501234567",
+            "+971551234568"
+        ],
+        "location": "AE",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 17; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 17; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 17; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 17; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 17; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000017",
+        "full_name": "Lina Johansson",
+        "emails": [
+            "lina.j@gmail.com",
+            "lina.johansson@gmail.com"
+        ],
+        "phones": [
+            "46701234567",
+            "46711234568"
+        ],
+        "normalized_phones": [
+            "+46701234567",
+            "+46711234568"
+        ],
+        "location": "SE",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 18; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 18; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 18; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 18; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 18; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000018",
+        "full_name": "Benjamin M\u00fcller",
+        "emails": [
+            "benjamin.mueller@gmail.com"
+        ],
+        "phones": [
+            "4915123456789"
+        ],
+        "normalized_phones": [
+            "+494915123456789"
+        ],
+        "location": "DE",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 19; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 19; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 19; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 19; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 19; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000019",
+        "full_name": "Priya Nair",
+        "emails": [
+            "priya.nair@gmail.com",
+            "priya.nair@outlook.com"
+        ],
+        "phones": [
+            "8123456789",
+            "9345678901"
+        ],
+        "normalized_phones": [
+            "+918123456789",
+            "+919345678901"
+        ],
+        "location": "IN",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 20; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 20; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 20; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 20; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 20; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000020",
+        "full_name": "Victor Nguyen",
+        "emails": [
+            "victor.n@proton.me",
+            "victor.nguyen@gmail.com"
+        ],
+        "phones": [
+            "84901234567",
+            "901234567"
+        ],
+        "normalized_phones": [
+            "+84901234567"
+        ],
+        "location": "VN",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 21; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 21; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 21; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 21; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 21; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000021",
+        "full_name": "Riya Gupta",
+        "emails": [
+            "riya.gupta@gmail.com"
+        ],
+        "phones": [
+            "9001234567"
+        ],
+        "normalized_phones": [
+            "+919001234567"
+        ],
+        "location": "IN",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 22; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 22; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 22; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 22; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 22; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000022",
+        "full_name": "Santiago P\u00e9rez",
+        "emails": [
+            "s.perez@outlook.com",
+            "santiago.perez@gmail.com"
+        ],
+        "phones": [
+            "521234567890",
+            "551234567891"
+        ],
+        "normalized_phones": [
+            "+521234567890",
+            "+52551234567891"
+        ],
+        "location": "MX",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 23; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 23; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 23; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 23; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 23; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000023",
+        "full_name": "Ava Brown",
+        "emails": [
+            "ava.brown@gmail.com"
+        ],
+        "phones": [
+            "4155550144"
+        ],
+        "normalized_phones": [
+            "+14155550144"
+        ],
+        "location": "US",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 24; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 24; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 24; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 24; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 24; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000024",
+        "full_name": "Oliver Smith",
+        "emails": [
+            "oliver.smith@gmail.com",
+            "oliver@protonmail.com"
+        ],
+        "phones": [
+            "353851234567",
+            "353861234568"
+        ],
+        "normalized_phones": [
+            "+353851234567",
+            "+353861234568"
+        ],
+        "location": "IE",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 25; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 25; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 25; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 25; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 25; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000025",
+        "full_name": "Farah Siddiqui",
+        "emails": [
+            "farah.siddiqui@gmail.com",
+            "farah.siddiqui@outlook.com"
+        ],
+        "phones": [
+            "971501112223"
+        ],
+        "normalized_phones": [
+            "+971501112223"
+        ],
+        "location": "AE",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 26; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 26; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 26; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 26; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 26; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000026",
+        "full_name": "Tariq Abdullah",
+        "emails": [
+            "tariq.abdullah@gmail.com"
+        ],
+        "phones": [
+            "97433123456"
+        ],
+        "normalized_phones": [
+            "+97433123456"
+        ],
+        "location": "QA",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 27; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 27; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 27; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 27; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 27; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000027",
+        "full_name": "Natalia Kowalska",
+        "emails": [
+            "nat.kowalska@outlook.com",
+            "natalia.kowalska@gmail.com"
+        ],
+        "phones": [
+            "48123456789",
+            "48765432109"
+        ],
+        "normalized_phones": [
+            "+48123456789",
+            "+48765432109"
+        ],
+        "location": "PL",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 28; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 28; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 28; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 28; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 28; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000028",
+        "full_name": "Simon Dubois",
+        "emails": [
+            "simon.dubois@gmail.com"
+        ],
+        "phones": [
+            "33123456789",
+            "33698765432"
+        ],
+        "normalized_phones": [
+            "+33123456789",
+            "+33698765432"
+        ],
+        "location": "FR",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 29; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 29; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 29; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 29; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 29; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000029",
+        "full_name": "Amir Hosseini",
+        "emails": [
+            "amir.h@proton.me",
+            "amir.hosseini@gmail.com",
+            "hosseini.amir@outlook.com"
+        ],
+        "phones": [
+            "989121234567",
+            "989131234568"
+        ],
+        "normalized_phones": [
+            "+989121234567",
+            "+989131234568"
+        ],
+        "location": "IR",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 30; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 30; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 30; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 30; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 30; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    },
+    {
+        "candidate_id": "CAND00000030",
+        "full_name": "Zaara Malik",
+        "emails": [
+            "zaara.malik@gmail.com"
+        ],
+        "phones": [
+            "923001234567"
+        ],
+        "normalized_phones": [
+            "+923001234567"
+        ],
+        "location": "PK",
+        "links": [],
+        "skills": null,
+        "experience": null,
+        "education": null,
+        "github_profile_data": null,
+        "provenance": [
+            {
+                "field": "candidate_id",
+                "source": "CSV: Row 31; Column candidate_id"
+            },
+            {
+                "field": "full_name",
+                "source": "CSV: Row 31; Column full_name"
+            },
+            {
+                "field": "emails",
+                "source": "CSV: Row 31; Column emails"
+            },
+            {
+                "field": "phones",
+                "source": "CSV: Row 31; Column phones"
+            },
+            {
+                "field": "location",
+                "source": "CSV: Row 31; Column location"
+            },
+            {
+                "field": "links",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "skills",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "experience",
+                "source": "not_in_resume"
+            },
+            {
+                "field": "education",
+                "source": "not_in_resume"
+            }
+        ]
+    }
+]

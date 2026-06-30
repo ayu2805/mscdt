@@ -8,6 +8,8 @@ import glob
 import csv
 import ollama
 import pypdf
+import pycountry
+import phonenumbers
 
 def read_pdf(file_path):
     reader = pypdf.PdfReader(file_path)
@@ -152,7 +154,7 @@ def calculate_data_quality(data):
     return score
 
 def load_csv_data(csv_path):
-    csv_lookup = {}
+    csv_lookup = {"by_email": {}, "by_phone": {}}
     if not os.path.exists(csv_path):
         return csv_lookup
 
@@ -164,16 +166,47 @@ def load_csv_data(csv_path):
             location = row.get('location', '').strip()
             
             emails = [e.strip().lower() for e in row.get('emails', '').split(',') if e.strip()]
+            phones = [p.strip() for p in row.get('phones', '').split(',') if p.strip()]
+            
+            payload = {
+                "candidate_id": candidate_id,
+                "full_name": full_name,
+                "location": location,
+                "emails": emails,
+                "phones": phones
+            }
             
             for email in emails:
-                if email not in csv_lookup:
-                    csv_lookup[email] = []
-                csv_lookup[email].append({
-                    "candidate_id": candidate_id,
-                    "full_name": full_name,
-                    "location": location
-                })
+                if email not in csv_lookup["by_email"]:
+                    csv_lookup["by_email"][email] = []
+                csv_lookup["by_email"][email].append(payload)
+                
+            for phone in phones:
+                if phone not in csv_lookup["by_phone"]:
+                    csv_lookup["by_phone"][phone] = []
+                csv_lookup["by_phone"][phone].append(payload)
+                
     return csv_lookup
+
+def get_iso_alpha2(location_string):
+    if not location_string:
+        return None
+    try:
+        country = pycountry.countries.search_fuzzy(location_string)[0]
+        return country.alpha_2
+    except LookupError:
+        return None
+
+def format_e164(phone_string, country_code):
+    if not phone_string:
+        return None
+    try:
+        parsed_number = phonenumbers.parse(phone_string, country_code)
+        if phonenumbers.is_valid_number(parsed_number):
+            return phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
+    except phonenumbers.NumberParseException:
+        pass
+    return phone_string
 
 def reorder_keys(data):
     ordered = {}
@@ -225,30 +258,64 @@ def main():
                 json_data["github_profile_data"] = None
 
             resume_emails = [e.lower() for e in json_data.get("emails", [])]
+            resume_phones = json_data.get("phones", []) if json_data.get("phones") else []
 
             candidate_id_csv = None
             full_name_csv = None
             location_csv = None
+            csv_emails = []
+            csv_phones = []
+            matched = False
 
             for email in resume_emails:
-                if email in csv_lookup:
-                    match_info = csv_lookup[email][0]
+                if email in csv_lookup["by_email"]:
+                    match_info = csv_lookup["by_email"][email][0]
                     candidate_id_csv = match_info["candidate_id"]
                     full_name_csv = match_info["full_name"]
                     location_csv = match_info["location"]
+                    csv_emails = match_info["emails"]
+                    csv_phones = match_info["phones"]
+                    matched = True
                     break
 
+            if not matched:
+                for phone in resume_phones:
+                    if phone in csv_lookup["by_phone"]:
+                        match_info = csv_lookup["by_phone"][phone][0]
+                        candidate_id_csv = match_info["candidate_id"]
+                        full_name_csv = match_info["full_name"]
+                        location_csv = match_info["location"]
+                        csv_emails = match_info["emails"]
+                        csv_phones = match_info["phones"]
+                        matched = True
+                        break
+
+            country_iso = get_iso_alpha2(location_csv)
+            
             json_data["candidate_id"] = candidate_id_csv
             json_data["full_name"] = full_name_csv
-            json_data["location"] = location_csv
+            json_data["location"] = country_iso if country_iso else location_csv
 
-            emails_key = tuple(sorted(resume_emails))
-            phones_key = tuple(sorted(json_data.get("phones", [])))
+            target_emails = set(resume_emails)
+            for e in csv_emails:
+                target_emails.add(e.lower())
+            json_data["emails"] = sorted(list(target_emails))
+
+            target_phones = set(resume_phones)
+            for p in csv_phones:
+                target_phones.add(p)
             
-            if not emails_key and not phones_key:
+            formatted_phones = set()
+            for phone in target_phones:
+                formatted_phones.add(format_e164(phone, country_iso))
+            json_data["phones"] = sorted(list(formatted_phones))
+
+            emails_key = tuple(sorted(list(target_emails)))
+            
+            if not emails_key:
                 candidate_id = (filename,)
             else:
-                candidate_id = (emails_key, phones_key)
+                candidate_id = (emails_key,)
 
             if candidate_id in unique_candidates:
                 existing_data = unique_candidates[candidate_id]
